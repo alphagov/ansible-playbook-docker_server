@@ -1,6 +1,14 @@
 ---
 # tasks file for docker_server
 
+- name: Install kernel extras for AUFS support
+  apt: name="{{ item }}" update_cache=yes
+  with_items:
+    - linux-image-extra-{{ ansible_kernel }}
+    - linux-image-extra-virtual
+  notify:
+    - restart docker
+
 - name: Add docker apt key.
   apt_key: keyserver=keyserver.ubuntu.com id=36A1D7869245C8950F966E92D8576A8BA88D21E9
 
