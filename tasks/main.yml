@@ -20,7 +20,7 @@
   with_items: packages
 
 - name: Allow external access
-  lineinfile: dest=/etc/default/docker line='export DOCKER_OPTS="-H 0.0.0.0:{{ docker_port }} --insecure-registry={{docker_registry_host}}:{{docker_registry_port}} --storage-driver=aufs"'
+  template: src=etc_default_docker dest=/etc/default/docker
   notify:
     - restart docker
 
