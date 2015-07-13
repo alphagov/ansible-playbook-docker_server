@@ -12,4 +12,4 @@
 # This is also a handy place to tweak where Docker's temporary files go.
 #export TMPDIR="/mnt/bigdrive/docker-tmp"
 
-export DOCKER_OPTS="-H unix:///var/run/docker.sock -H 0.0.0.0:{{ docker_port }} --insecure-registry={{docker_registry_host}}:{{docker_registry_port}} --storage-driver=aufs"
+export DOCKER_OPTS="-H unix:///var/run/docker.sock -H 0.0.0.0:{{ docker_port }} {% if docker_registry_host is defined %} --insecure-registry={{docker_registry_host}}:{{docker_registry_port}} {% endif %}  --storage-driver=aufs"
