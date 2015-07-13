@@ -25,7 +25,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: docker-nodes
       roles:
-         - { role: docker_server, docker_port: 4567 }
+         - { role: docker_server, docker_port: 4567, docker_version: 1.7.0 }
 
 License
 -------
