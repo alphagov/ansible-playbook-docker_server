@@ -15,9 +15,15 @@
 - name: Add Docker repository.
   apt_repository: repo='deb https://get.docker.io/ubuntu docker main' state=present
 
-- name: Install packages
-  apt: name="{{ item }}" update_cache=yes
-  with_items: packages
+- name: Install support packages
+  apt: name="{{ item }}"
+  with_items:
+    - wget
+
+- name: Install docker package
+  apt: name="{{ item }}{% if docker_version is defined %}={{ docker_version }}{% endif %}"
+  with_items:
+    - lxc-docker
 
 - name: Allow external access
   template: src=etc_default_docker dest=/etc/default/docker
