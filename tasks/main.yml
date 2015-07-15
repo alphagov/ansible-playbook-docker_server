@@ -21,9 +21,9 @@
     - wget
 
 - name: Install docker package
-  apt: name="{{ item }}{% if docker_version is defined %}={{ docker_version }}{% endif %}"
+  apt: name="{{ item }}"
   with_items:
-    - lxc-docker
+    - "{% if docker_version is defined %}lxc-docker-{{ docker_version }}{% else %}lxc-docker{% endif %}"
 
 - name: Allow external access
   template: src=etc_default_docker dest=/etc/default/docker
